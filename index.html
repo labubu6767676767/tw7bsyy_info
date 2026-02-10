@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tw7bsyy Profile</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            background: #02040a;
+            color: white;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Анимированный фон "Дым" */
+        .smoke-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at 50% 50%, #050a1a 0%, #02040a 100%);
+            overflow: hidden;
+        }
+
+        .smoke-layer {
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            top: -25%;
+            left: -25%;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(0, 71, 171, 0.4) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(186, 230, 253, 0.3) 0%, transparent 40%),
+                radial-gradient(circle at 50% 50%, rgba(0, 30, 90, 0.5) 0%, transparent 50%),
+                radial-gradient(circle at 30% 80%, rgba(0, 100, 200, 0.3) 0%, transparent 40%);
+            filter: blur(80px);
+            animation: smoke-drift 20s infinite alternate ease-in-out;
+        }
+
+        @keyframes smoke-drift {
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(5deg) scale(1.1) translate(2%, 2%); }
+            100% { transform: rotate(-5deg) scale(1) translate(-2%, -2%); }
+        }
+
+        /* Стеклянная карточка */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 32px;
+            padding: 40px;
+            width: 100%;
+            max-width: 460px;
+            text-align: center;
+            box-shadow: 0 50px 120px rgba(0, 0, 0, 0.9);
+            animation: fadeIn 1.5s ease-out;
+            position: relative;
+            z-index: 10;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .profile-pic {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            border: 2px solid rgba(186, 230, 253, 0.4);
+            padding: 4px;
+            background: rgba(0,0,0,0.6);
+            object-fit: cover;
+            box-shadow: 0 0 30px rgba(186, 230, 253, 0.2);
+        }
+
+        .username {
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: -2px;
+            margin-bottom: 5px;
+            background: linear-gradient(to bottom, #dcf0ff 0%, #93c5fd 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 10px rgba(147, 197, 253, 0.3));
+        }
+
+        .status {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            margin-bottom: 12px;
+        }
+
+        .location {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            font-size: 0.7rem;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 30px;
+        }
+
+        .social-icon {
+            font-size: 1.6rem;
+            color: white;
+            opacity: 0.5;
+            transition: all 0.4s ease;
+        }
+
+        .social-icon:hover {
+            opacity: 1;
+            transform: translateY(-5px);
+            color: #93c5fd;
+            text-shadow: 0 0 15px rgba(147, 197, 253, 0.5);
+        }
+
+        /* КОМПАКТНЫЙ ПЛЕЕР */
+        .music-player {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 20px;
+            padding: 14px 18px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            --accent-color: 147, 197, 253; /* Голубой акцент */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .player-main {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+
+        .album-art-container {
+            width: 42px;
+            height: 42px;
+            border-radius: 8px;
+            overflow: hidden;
+            flex-shrink: 0;
+            box-shadow: 0 0 10px rgba(var(--accent-color), 0.2);
+        }
+
+        .album-art-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .track-info {
+            flex-grow: 1;
+            text-align: left;
+            overflow: hidden;
+            line-height: 1.2;
+        }
+
+        .track-name {
+            font-size: 0.75rem;
+            font-weight: 700;
+            display: block;
+            color: #ffffff;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .artist-name {
+            font-size: 0.65rem;
+            color: #64748b;
+            text-transform: uppercase;
+        }
+
+        .player-actions i {
+            font-size: 1.1rem;
+            color: #ffffff;
+            transition: opacity 0.2s;
+        }
+
+        /* Компактные ползунки */
+        input[type="range"] {
+            -webkit-appearance: none;
+            appearance: none;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            height: 3px;
+            outline: none;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 8px;
+            height: 8px;
+            background: rgb(var(--accent-color));
+            border-radius: 50%;
+            box-shadow: 0 0 8px rgb(var(--accent-color));
+            border: none;
+        }
+
+        .controls-row {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .timeline-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.6rem;
+            color: #475569;
+        }
+
+        .volume-container {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 8px;
+            opacity: 0.6;
+        }
+        
+        .volume-slider {
+            width: 60px !important;
+        }
+
+        /* МИНИМАЛИСТИЧНЫЙ ЭКРАН ВХОДА */
+        #enter-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #02040a;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: opacity 0.8s ease;
+        }
+
+        .mini-dot {
+            width: 4px;
+            height: 4px;
+            background: #93c5fd;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #93c5fd;
+            animation: pulse-dot 1.5s infinite ease-in-out;
+            margin-bottom: 10px;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 0.2; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.5); }
+        }
+
+        .enter-text-tiny {
+            font-size: 0.55rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #1e293b;
+            transition: color 0.3s;
+        }
+
+        #enter-overlay:hover .enter-text-tiny {
+            color: #475569;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="enter-overlay" onclick="startApp()">
+        <div class="mini-dot"></div>
+        <span class="enter-text-tiny">tap</span>
+    </div>
+
+    <div class="smoke-bg">
+        <div class="smoke-layer"></div>
+    </div>
+
+    <div class="glass-card">
+        <img src="https://i.postimg.cc/76dqtd59/Picsart-25-11-24-21-57-47-889.jpg" alt="tw7bsyy" class="profile-pic">
+        
+        <h1 class="username">tw7bsyy</h1>
+        <p class="status">далбоеб</p>
+        
+        <div class="location">
+            <i class="fa-solid fa-location-dot"></i>
+            <span>ПИДОРАСЫ</span>
+        </div>
+
+        <div class="social-links">
+            <a href="https://www.tiktok.com/@tw7bsyy" target="_blank" class="social-icon"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="https://discord.com/users/1176258524691562606" target="_blank" class="social-icon"><i class="fa-brands fa-discord"></i></a>
+            <a href="https://steamcommunity.com/id/tw7bsyy" target="_blank" class="social-icon"><i class="fa-brands fa-steam"></i></a>
+        </div>
+
+        <!-- Плеер с голубым акцентом -->
+        <div class="music-player" id="player-container">
+            <div class="player-main">
+                <div class="album-art-container">
+                    <img src="https://i.postimg.cc/VNsMzrKP/artworks-6ybrn-H0Hk-Jdl5kg-Q-qjz-F3Q-t500x500.jpg" alt="Обложка" class="album-art-img">
+                </div>
+                <div class="track-info">
+                    <span class="track-name">В ЭТОЙ ТРАВЕ</span>
+                    <span class="artist-name">СЕРЕГА ПИРАТ</span>
+                </div>
+                <div class="player-actions">
+                    <i id="play-pause" class="fa-solid fa-play cursor-pointer hover:opacity-70"></i>
+                </div>
+            </div>
+
+            <div class="controls-row">
+                <div class="timeline-container">
+                    <span id="current-time">0:00</span>
+                    <input type="range" id="timeline" value="0" step="0.1" min="0">
+                    <span id="duration">2:11</span>
+                </div>
+
+                <div class="volume-container">
+                    <i id="volume-icon" class="fa-solid fa-volume-high text-[8px]"></i>
+                    <input type="range" id="volume" class="volume-slider" value="100" max="100">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <audio id="bg-music">
+        <source src="https://files.catbox.moe/tky1gz.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        const music = document.getElementById('bg-music');
+        const playBtn = document.getElementById('play-pause');
+        const overlay = document.getElementById('enter-overlay');
+        const timeline = document.getElementById('timeline');
+        const volume = document.getElementById('volume');
+        const currentTimeEl = document.getElementById('current-time');
+        const durationEl = document.getElementById('duration');
+        const volumeIcon = document.getElementById('volume-icon');
+
+        const accentColor = '147, 197, 253'; 
+        document.getElementById('player-container').style.setProperty('--accent-color', accentColor);
+
+        function formatTime(seconds) {
+            if (isNaN(seconds)) return "0:00";
+            const min = Math.floor(seconds / 60);
+            const sec = Math.floor(seconds % 60);
+            return `${min}:${sec < 10 ? '0' : ''}${sec}`;
+        }
+
+        function updateTimelineBackground() {
+            if (isNaN(music.duration)) return;
+            const pos = (music.currentTime / music.duration) * 100;
+            const color = `rgb(${accentColor})`;
+            timeline.style.background = `linear-gradient(to right, ${color} 0%, ${color} ${pos}%, rgba(255,255,255,0.1) ${pos}%, rgba(255,255,255,0.1) 100%)`;
+        }
+
+        function startApp() {
+            overlay.style.opacity = '0';
+            overlay.style.pointerEvents = 'none';
+            setTimeout(() => {
+                overlay.style.display = 'none';
+                music.play().then(() => {
+                    playBtn.classList.replace('fa-play', 'fa-pause');
+                }).catch(err => console.log("Autoplay blocked"));
+            }, 800);
+        }
+
+        playBtn.addEventListener('click', () => {
+            if (music.paused) {
+                music.play();
+                playBtn.classList.replace('fa-play', 'fa-pause');
+            } else {
+                music.pause();
+                playBtn.classList.replace('fa-pause', 'fa-play');
+            }
+        });
+
+        music.addEventListener('timeupdate', () => {
+            if (!isNaN(music.duration)) {
+                timeline.value = music.currentTime;
+                currentTimeEl.textContent = formatTime(music.currentTime);
+                updateTimelineBackground();
+            }
+        });
+
+        music.addEventListener('loadedmetadata', () => {
+            timeline.max = music.duration;
+            durationEl.textContent = formatTime(music.duration);
+            updateTimelineBackground();
+        });
+
+        // Исправленный блок перемотки
+        timeline.addEventListener('input', () => {
+            music.currentTime = timeline.value;
+            currentTimeEl.textContent = formatTime(timeline.value);
+            updateTimelineBackground();
+        });
+
+        volume.addEventListener('input', () => {
+            const val = volume.value;
+            music.volume = val / 100;
+            
+            if (val == 0) volumeIcon.className = 'fa-solid fa-volume-xmark';
+            else if (val < 50) volumeIcon.className = 'fa-solid fa-volume-low';
+            else volumeIcon.className = 'fa-solid fa-volume-high';
+
+            volume.style.background = `linear-gradient(to right, white 0%, white ${val}%, rgba(255,255,255,0.1) ${val}%, rgba(255,255,255,0.1) 100%)`;
+        });
+
+        // Инициализация фона громкости
+        volume.style.background = `linear-gradient(to right, white 0%, white 100%, rgba(255,255,255,0.1) 100%)`;
+    </script>
+</body>
+</html>
